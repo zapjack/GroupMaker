@@ -60,7 +60,7 @@ public class MainFragment extends Fragment {
 
         registerForContextMenu(listView);
 
-        adapter = new ArrayAdapter(getContext(), android.R.layout.simple_list_item_1, Names.names);
+        adapter = new ArrayAdapter(getContext(), android.R.layout.simple_list_item_1, StudentGroup.names);
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -77,7 +77,7 @@ public class MainFragment extends Fragment {
         FileInputStream fis;
         Scanner scan;
 
-        Names.names = new ArrayList<String>();
+        StudentGroup.names = new ArrayList<String>();
 
         try {
             Resources res = getResources();
@@ -86,12 +86,12 @@ public class MainFragment extends Fragment {
 
             while (scan.hasNext()) {
                 String s = scan.nextLine();
-                Names.names.add(s);
+                StudentGroup.names.add(s);
                 Log.d(TAG, "READ: " + s);
             }
             scan.close();
 
-            Collections.sort(Names.names);
+            Collections.sort(StudentGroup.names);
         }
         catch (Exception e) {
             Log.d(TAG, "Exception: " + e);
@@ -102,7 +102,7 @@ public class MainFragment extends Fragment {
         FileInputStream fis;
         Scanner scan;
 
-        Names.names = new ArrayList<String>();
+        StudentGroup.names = new ArrayList<String>();
 
         try {
             Resources res = getResources();
@@ -111,12 +111,12 @@ public class MainFragment extends Fragment {
 
             while (scan.hasNext()) {
                 String s = scan.nextLine();
-                Names.names.add(s);
+                StudentGroup.names.add(s);
                 Log.d(TAG, "READ: " + s);
             }
             scan.close();
 
-            Collections.sort(Names.names);
+            Collections.sort(StudentGroup.names);
         }
         catch (Exception e) {
             Log.d(TAG, "Exception: " + e);
@@ -138,7 +138,7 @@ public class MainFragment extends Fragment {
             case R.id.deleteItem:
                 // View view = getView();
                 // Toast.makeText(view.getContext(), "Deleting at pos: " + position, Toast.LENGTH_LONG).show();
-                Names.names.remove(position);
+                StudentGroup.names.remove(position);
                 adapter.notifyDataSetChanged();
 
                 return true;

@@ -31,6 +31,7 @@ public class StudentGroup {
         }
     }
 
+    public static ArrayList<String> names;
     public static int groupSize = 0;
     public static ArrayList<StudentGroup> displayGroup = null;
     public static void makeDisplayGroup(int groupSize, ArrayList<String> roster) {

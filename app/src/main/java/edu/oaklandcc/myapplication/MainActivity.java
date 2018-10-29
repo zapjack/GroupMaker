@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         int groupSize = Integer.parseInt((String) spinner.getSelectedItem());
         //StudentGroup.makeGroups(groupSize, Names.names);
 
-        StudentGroup.makeDisplayGroup(groupSize, Names.names);
+        StudentGroup.makeDisplayGroup(groupSize, StudentGroup.names);
 
         FrameLayout sideContainer = findViewById(R.id.side_container); // only in the large display
 
