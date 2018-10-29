@@ -33,6 +33,7 @@ public class MainFragment extends Fragment {
     ArrayAdapter<String> adapter;
     private static final String TAG = "*** AJ ***";
 
+    ListView listView;
 
     public MainFragment() {
         // Required empty public constructor
@@ -56,13 +57,13 @@ public class MainFragment extends Fragment {
         loadRoster();
 
         final View view = getView();
-        ListView listView = view.findViewById(R.id.studentList);
+        listView = view.findViewById(R.id.studentList);
 
         registerForContextMenu(listView);
 
         adapter = new ArrayAdapter(getContext(), android.R.layout.simple_list_item_1, StudentGroup.names);
         listView.setAdapter(adapter);
-
+/*
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> arg0, View v, int position,
@@ -70,31 +71,33 @@ public class MainFragment extends Fragment {
                 String s = (String) adapter.getItem(position);
                 Toast.makeText(view.getContext(), position + ": "+ s, Toast.LENGTH_LONG).show();
             }
-        });
+        }); */
     }
 
     private void loadRoster() {
         FileInputStream fis;
         Scanner scan;
 
-        StudentGroup.names = new ArrayList<String>();
+        // Singleton pattern...
+        if (StudentGroup.names == null) {
+            StudentGroup.names = new ArrayList<String>();
 
-        try {
-            Resources res = getResources();
-            InputStream is = res.openRawResource(R.raw.roster);
-            scan = new Scanner(is);
+            try {
+                Resources res = getResources();
+                InputStream is = res.openRawResource(R.raw.roster);
+                scan = new Scanner(is);
 
-            while (scan.hasNext()) {
-                String s = scan.nextLine();
-                StudentGroup.names.add(s);
-                Log.d(TAG, "READ: " + s);
+                while (scan.hasNext()) {
+                    String s = scan.nextLine();
+                    StudentGroup.names.add(s);
+                    Log.d(TAG, "READ: " + s);
+                }
+                scan.close();
+
+                Collections.sort(StudentGroup.names);
+            } catch (Exception e) {
+                Log.d(TAG, "Exception: " + e);
             }
-            scan.close();
-
-            Collections.sort(StudentGroup.names);
-        }
-        catch (Exception e) {
-            Log.d(TAG, "Exception: " + e);
         }
     }
 
@@ -139,6 +142,7 @@ public class MainFragment extends Fragment {
                 // View view = getView();
                 // Toast.makeText(view.getContext(), "Deleting at pos: " + position, Toast.LENGTH_LONG).show();
                 StudentGroup.names.remove(position);
+                StudentGroup.makeDisplayGroup(StudentGroup.groupSize); // Recreate with last-used group size
                 adapter.notifyDataSetChanged();
 
                 return true;
