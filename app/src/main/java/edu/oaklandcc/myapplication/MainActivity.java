@@ -56,7 +56,9 @@ public class MainActivity extends AppCompatActivity {
     public void onGenerate(View view) {
         Spinner spinner = findViewById(R.id.spinner);
         int groupSize = Integer.parseInt((String) spinner.getSelectedItem());
-        StudentGroup.makeGroups(groupSize, Names.names);
+        //StudentGroup.makeGroups(groupSize, Names.names);
+
+        StudentGroup.makeDisplayGroup(groupSize, Names.names);
 
         FrameLayout sideContainer = findViewById(R.id.side_container); // only in the large display
 
@@ -80,19 +82,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the app bar.
         getMenuInflater().inflate(R.menu.main_activity, menu);
-
-        MenuItem menuItem = menu.findItem(R.id.action_share);
-        shareActionProvider =
-                (ShareActionProvider) MenuItemCompat.getActionProvider(menuItem);
-        setShareActionIntent("Want to join me for pizza?");
         return super.onCreateOptionsMenu(menu);
-    }
-
-    private void setShareActionIntent(String text) {
-        Intent intent = new Intent(Intent.ACTION_SEND);
-        intent.setType("text/plain");
-        intent.putExtra(Intent.EXTRA_TEXT, text);
-        shareActionProvider.setShareIntent(intent);
     }
 
     @Override
@@ -101,11 +91,6 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_add:
                 Toast.makeText(getApplicationContext(), "ADD", Toast.LENGTH_LONG).show();
                 return true;
-
-     /*       case R.id.action_save:
-                Toast.makeText(getApplicationContext(), "SAVE", Toast.LENGTH_LONG).show();
-                return true;
-    */
 
             default:
                 return super.onOptionsItemSelected(item);

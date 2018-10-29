@@ -4,11 +4,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class StudentGroup {
-    public static StudentGroup [] groups;
 
+    // Static members
+
+    public static StudentGroup [] groups;
     public static StudentGroup[] getGroups() {
         return groups;
     }
+
 
     // EXCLUDE THIS!
 
@@ -19,7 +22,7 @@ public class StudentGroup {
 
         int j = 0;
         for (int i = 0; i < numGroups && j < roster.size(); i++) {
-            StudentGroup group = new StudentGroup("Team " + i);
+            StudentGroup group = new StudentGroup();
             for (int k = 0; k < groupSize && j < roster.size(); k++) {
                 group.addMember(roster.get(j));
                 j++;
@@ -28,20 +31,43 @@ public class StudentGroup {
         }
     }
 
-    private String name;
+    public static int groupSize = 0;
+    public static ArrayList<StudentGroup> displayGroup = null;
+    public static void makeDisplayGroup(int groupSize, ArrayList<String> roster) {
+        StudentGroup.groupSize = groupSize;
+        displayGroup = new ArrayList<>();
+        Collections.shuffle(roster);
+        int numGroups = roster.size() / groupSize;
+
+        int j = 0;
+        for (int i = 0; i < numGroups && j < roster.size(); i++) {
+            StudentGroup group = new StudentGroup();
+            for (int k = 0; k < groupSize && j < roster.size(); k++) {
+                group.addMember(roster.get(j));
+                j++;
+            }
+            displayGroup.add(group);
+        }
+    }
+
+    public static String getGroupsAsString() {
+        String s = "";
+        int i = 0;
+
+        for (StudentGroup g : StudentGroup.displayGroup) {
+            s += "Team: " + i++;
+            s += g.toString() + "\n";
+        }
+
+        return s;
+    }
+
+    // Instance members
+
     private ArrayList<String> members;
 
-    public StudentGroup(String name) {
-        this.name = name;
+    public StudentGroup() {
         members = new ArrayList<String>();
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public ArrayList<String> getMembers() {
@@ -52,8 +78,15 @@ public class StudentGroup {
         this.members.add(student);
     }
 
+    public String getMember(int position) {
+        return members.get(position);
+    }
+
     @Override
     public String toString() {
-        return name + ": " + members;
+        String s = "";
+        for (String member : members)
+            s += member + "\n";
+        return s;
     }
 }

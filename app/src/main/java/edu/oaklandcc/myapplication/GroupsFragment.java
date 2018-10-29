@@ -19,27 +19,44 @@ public class GroupsFragment extends ListFragment {
         // Required empty public constructor
     }
 
-/*
+    /*
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                 Bundle savedInstanceState) {
+            // Inflate the layout for this fragment
+            return inflater.inflate(R.layout.fragment_groups, container, false);
+        }
+    */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_groups, container, false);
+        /*
+        String[] names = new String[StudentGroup.groups.length];
+        for (int i = 0; i < names.length; i++) {
+            names[i] = StudentGroup.groups[i].toString();
+        }
+        */
+        /*
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                inflater.getContext(), android.R.layout.simple_list_item_1,
+                names);
+                */
+
+        if (StudentGroup.groupSize == 2) {
+            TwoAdapter adapter = new TwoAdapter(inflater.getContext(), StudentGroup.displayGroup);
+            setListAdapter(adapter);
+        }
+        else if (StudentGroup.groupSize == 3) {
+            ThreeAdapter adapter = new ThreeAdapter(inflater.getContext(), StudentGroup.displayGroup);
+            setListAdapter(adapter);
+        }
+        else {
+            FourAdapter adapter = new FourAdapter(inflater.getContext(), StudentGroup.displayGroup);
+            setListAdapter(adapter);
+        }
+
+        return super.onCreateView(inflater, container, savedInstanceState);
     }
-*/
-@Override
-public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                         Bundle savedInstanceState) {
-    String[] names = new String[StudentGroup.groups.length];
-    for (int i = 0; i < names.length; i++) {
-        names[i] = StudentGroup.groups[i].toString();
-    }
-    ArrayAdapter<String> adapter = new ArrayAdapter<>(
-            inflater.getContext(), android.R.layout.simple_list_item_1,
-            names);
-    setListAdapter(adapter);
-    return super.onCreateView(inflater, container, savedInstanceState);
-}
 
     public void onListItemClick(ListView listView,
                                 View itemView,

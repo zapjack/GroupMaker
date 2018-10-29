@@ -31,7 +31,8 @@ public class GroupsActivity extends AppCompatActivity {
         MenuItem menuItem = menu.findItem(R.id.action_share_groups);
         shareActionProvider =
                 (ShareActionProvider) MenuItemCompat.getActionProvider(menuItem);
-        setShareActionIntent("Groups - want to join me for pizza?");
+        // setShareActionIntent("Groups - want to join me for pizza?");
+        setShareActionIntent(StudentGroup.getGroupsAsString());
         return super.onCreateOptionsMenu(menu);
     }
 
