@@ -19,28 +19,10 @@ public class GroupsFragment extends ListFragment {
         // Required empty public constructor
     }
 
-    /*
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            // Inflate the layout for this fragment
-            return inflater.inflate(R.layout.fragment_groups, container, false);
-        }
-    */
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        /*
-        String[] names = new String[StudentGroup.groups.length];
-        for (int i = 0; i < names.length; i++) {
-            names[i] = StudentGroup.groups[i].toString();
-        }
-        */
-        /*
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(
-                inflater.getContext(), android.R.layout.simple_list_item_1,
-                names);
-                */
 
         if (StudentGroup.groupSize == 2) {
             TwoAdapter adapter = new TwoAdapter(inflater.getContext(), StudentGroup.displayGroup);

@@ -145,21 +145,4 @@ public class MainFragment extends Fragment {
         }
         return super.onContextItemSelected(item);
     }
-
-    /*
-    @Override
-    public void onCreateContextMenu(ContextMenu menu, View view, ContextMenu.ContextMenuInfo menuInfo) {
-        getMenuInflater().inflate(R.menu.main_frag_context, menu);
-    }
-
-    @Override
-    public boolean onContextItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.deleteItem:
-
-                return true;
-        }
-        return super.onContextItemSelected(item);
-    }
-    */
 }
