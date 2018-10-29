@@ -6,30 +6,7 @@ import java.util.Collections;
 public class StudentGroup {
 
     // Static members
-
-    public static StudentGroup [] groups;
-    public static StudentGroup[] getGroups() {
-        return groups;
-    }
-
-
     // EXCLUDE THIS!
-
-    public static void makeGroups(int groupSize, ArrayList<String> roster) {
-        Collections.shuffle(roster);
-        int numGroups = roster.size() / groupSize;
-        groups = new StudentGroup[numGroups];
-
-        int j = 0;
-        for (int i = 0; i < numGroups && j < roster.size(); i++) {
-            StudentGroup group = new StudentGroup();
-            for (int k = 0; k < groupSize && j < roster.size(); k++) {
-                group.addMember(roster.get(j));
-                j++;
-            }
-            groups[i] = group;
-        }
-    }
 
     public static ArrayList<String> names;
     public static int groupSize = 0;
