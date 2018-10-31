@@ -66,7 +66,7 @@ public class StudentGroup {
         int i = 0;
 
         for (StudentGroup g : StudentGroup.displayGroup) {
-            s += "Team: " + i++;
+            s += "Team: " + i++ +"\n";
             s += g.toString() + "\n";
         }
 
