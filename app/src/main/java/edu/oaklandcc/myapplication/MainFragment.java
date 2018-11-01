@@ -1,9 +1,12 @@
 package edu.oaklandcc.myapplication;
 
 
+import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
@@ -13,7 +16,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.io.FileInputStream;
@@ -32,6 +38,8 @@ import java.util.Scanner;
 public class MainFragment extends Fragment {
     ArrayAdapter<String> adapter;
     private static final String TAG = "*** AJ ***";
+
+    ShowGroups listener;
 
     ListView listView;
 
@@ -63,6 +71,19 @@ public class MainFragment extends Fragment {
 
         adapter = new ArrayAdapter(getContext(), android.R.layout.simple_list_item_1, StudentGroup.names);
         listView.setAdapter(adapter);
+
+        Button generate = view.findViewById(R.id.generate);
+        generate.setOnClickListener(
+                event -> {
+                    Spinner spinner = view.findViewById(R.id.spinner);
+                    int groupSize = Integer.parseInt((String) spinner.getSelectedItem());
+                    //StudentGroup.makeGroups(groupSize, Names.names);
+
+                    StudentGroup.makeDisplayGroup(groupSize);
+
+                    listener.showGroups(groupSize);
+                }
+        );
 /*
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -148,5 +169,15 @@ public class MainFragment extends Fragment {
                 return true;
         }
         return super.onContextItemSelected(item);
+    }
+
+    interface ShowGroups {
+        public void showGroups(int groupSize);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        listener = (ShowGroups) context;
     }
 }
