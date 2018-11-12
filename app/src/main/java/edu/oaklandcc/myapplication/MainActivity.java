@@ -2,6 +2,8 @@ package edu.oaklandcc.myapplication;
 
 import android.content.Intent;
 import android.content.res.Resources;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -25,7 +27,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
-public class MainActivity extends AppCompatActivity implements MainFragment.ShowGroups {
+public class MainActivity extends AppCompatActivity implements MainFragment.ShowGroups, AddFragment.AddingSome {
     private static final String TAG = "*** AJ ***";
 
     private ShareActionProvider shareActionProvider;
@@ -39,12 +41,16 @@ public class MainActivity extends AppCompatActivity implements MainFragment.Show
 
         View fragmentContainer = findViewById(R.id.main_container);
         if (fragmentContainer != null) {
-            MainFragment frag = new MainFragment();
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.add(R.id.main_container, frag);
-            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-            ft.addToBackStack(null);
-            ft.commit();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            Fragment fragMain = fragmentManager.findFragmentByTag("MAIN");
+            if (fragMain == null) {
+                MainFragment frag = new MainFragment();
+                FragmentTransaction ft = fragmentManager.beginTransaction();
+                ft.add(R.id.main_container, frag, "MAIN");
+                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                ft.addToBackStack(null);
+                ft.commit();
+            }
         }
     }
 
@@ -58,9 +64,21 @@ public class MainActivity extends AppCompatActivity implements MainFragment.Show
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+
             case R.id.action_add:
-                Intent intent = new Intent(this, AddActivity.class);
-                startActivity(intent);
+                FrameLayout sideContainer = findViewById(R.id.side_container); // only in the large display
+                if (sideContainer == null) {
+                    Intent intent = new Intent(this, AddActivity.class);
+                    startActivity(intent);
+                }
+                else {
+                    AddFragment frag = new AddFragment();
+                    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                    ft.replace(R.id.side_container, frag);
+                    ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                    ft.addToBackStack(null);
+                    ft.commit();
+                }
                 return true;
 
             default:
@@ -68,6 +86,7 @@ public class MainActivity extends AppCompatActivity implements MainFragment.Show
         }
     }
 
+    /* Display */
     public void showGroups(int groupSize) {
         FrameLayout sideContainer = findViewById(R.id.side_container); // only in the large display
 
@@ -85,5 +104,10 @@ public class MainActivity extends AppCompatActivity implements MainFragment.Show
             ft.addToBackStack(null);
             ft.commit();
         }
+    }
+
+    @Override
+    public void addedSomeone(String name) {
+        StudentGroup.names.add(name);
     }
 }

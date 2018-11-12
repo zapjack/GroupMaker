@@ -96,7 +96,6 @@ public class MainFragment extends Fragment {
     }
 
     private void loadRoster() {
-        FileInputStream fis;
         Scanner scan;
 
         // Singleton pattern...
@@ -169,6 +168,10 @@ public class MainFragment extends Fragment {
                 return true;
         }
         return super.onContextItemSelected(item);
+    }
+
+    public void refresh() {
+        adapter.notifyDataSetChanged();
     }
 
     interface ShowGroups {
