@@ -23,16 +23,15 @@ public class TwoAdapter extends ArrayAdapter<StudentGroup> {
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.two_person_team, parent, false);
         }
-        // Lookup view for data population
+
         TextView teamNumber = (TextView) convertView.findViewById(R.id.teamNumber);
         TextView textMember1 = (TextView) convertView.findViewById(R.id.member1);
         TextView textMember2 = (TextView) convertView.findViewById(R.id.member2);
-        // Populate the data into the template view using the data object
 
         teamNumber.setText("Team: " + position);
         textMember1.setText(group.getMember(0));
         textMember2.setText(group.getMember(1));
-        // Return the completed view to render on screen
+
         return convertView;
     }
 }
