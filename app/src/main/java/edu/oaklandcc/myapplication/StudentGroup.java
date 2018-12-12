@@ -5,9 +5,6 @@ import java.util.Collections;
 
 public class StudentGroup {
 
-    // Static members
-    // EXCLUDE THIS!
-
     public static final int DEFAULT_GROUP_SIZE = 2;
 
     // raw list of names - not in groups yet

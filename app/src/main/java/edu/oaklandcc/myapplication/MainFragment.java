@@ -85,15 +85,6 @@ public class MainFragment extends Fragment {
                     listener.showGroups(/*groupSize*/);
                 }
         );
-/*
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> arg0, View v, int position,
-                                    long id) {
-                String s = (String) adapter.getItem(position);
-                Toast.makeText(view.getContext(), position + ": "+ s, Toast.LENGTH_LONG).show();
-            }
-        }); */
     }
 
     private void loadRoster() {
@@ -119,31 +110,6 @@ public class MainFragment extends Fragment {
             } catch (Exception e) {
                 Log.d(TAG, "Exception: " + e);
             }
-        }
-    }
-
-    private void saveRoster() {
-        FileInputStream fis;
-        Scanner scan;
-
-        StudentGroup.names = new ArrayList<String>();
-
-        try {
-            Resources res = getResources();
-            InputStream is = res.openRawResource(R.raw.roster);
-            scan = new Scanner(is);
-
-            while (scan.hasNext()) {
-                String s = scan.nextLine();
-                StudentGroup.names.add(s);
-                Log.d(TAG, "READ: " + s);
-            }
-            scan.close();
-
-            Collections.sort(StudentGroup.names);
-        }
-        catch (Exception e) {
-            Log.d(TAG, "Exception: " + e);
         }
     }
 

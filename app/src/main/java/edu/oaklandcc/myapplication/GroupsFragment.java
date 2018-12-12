@@ -10,15 +10,10 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-
-/**
- * A simple {@link Fragment} subclass.
- */
 public class GroupsFragment extends ListFragment {
     public GroupsFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -38,14 +33,5 @@ public class GroupsFragment extends ListFragment {
         }
 
         return super.onCreateView(inflater, container, savedInstanceState);
-    }
-
-    public void onListItemClick(ListView listView,
-                                View itemView,
-                                int position,
-                                long id) {
-    /*    if (mListener != null) {
-            mListener.onFragmentInteraction(id);
-        } */
     }
 }
