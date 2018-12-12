@@ -18,9 +18,6 @@ public class GroupsActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarGroups);
         setSupportActionBar(toolbar);
-
-        Intent intent = getIntent();
-        int groupSize = intent.getIntExtra("groupSize", 2);
     }
 
     @Override
@@ -31,7 +28,7 @@ public class GroupsActivity extends AppCompatActivity {
         MenuItem menuItem = menu.findItem(R.id.action_share_groups);
         shareActionProvider =
                 (ShareActionProvider) MenuItemCompat.getActionProvider(menuItem);
-        // setShareActionIntent("Groups - want to join me for pizza?");
+
         setShareActionIntent(StudentGroup.getGroupsAsString());
         return super.onCreateOptionsMenu(menu);
     }

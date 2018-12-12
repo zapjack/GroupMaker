@@ -27,6 +27,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
+/* To do: better design would be to have the MainFrag as a fixed fragment in the main activity.
+ *
+ */
+
 public class MainActivity extends AppCompatActivity implements MainFragment.ShowGroups, AddFragment.AddingSome {
     private static final String TAG = "*** AJ ***";
 
@@ -87,12 +91,12 @@ public class MainActivity extends AppCompatActivity implements MainFragment.Show
     }
 
     /* Display */
-    public void showGroups(int groupSize) {
+    public void showGroups(/*int groupSize*/) {
         FrameLayout sideContainer = findViewById(R.id.side_container); // only in the large display
 
         if (sideContainer == null) {
             Intent intent = new Intent(this, GroupsActivity.class);
-            intent.putExtra("groupSize", groupSize);
+            //intent.putExtra("groupSize", groupSize);
             startActivity(intent);
         }
         else {

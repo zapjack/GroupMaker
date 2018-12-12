@@ -79,9 +79,10 @@ public class MainFragment extends Fragment {
                     int groupSize = Integer.parseInt((String) spinner.getSelectedItem());
                     //StudentGroup.makeGroups(groupSize, Names.names);
 
+
                     StudentGroup.makeDisplayGroup(groupSize);
 
-                    listener.showGroups(groupSize);
+                    listener.showGroups(/*groupSize*/);
                 }
         );
 /*
@@ -175,7 +176,7 @@ public class MainFragment extends Fragment {
     }
 
     interface ShowGroups {
-        public void showGroups(int groupSize);
+        public void showGroups(/* int groupSize*/);
     }
 
     @Override
